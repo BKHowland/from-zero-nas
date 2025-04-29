@@ -1,4 +1,5 @@
 # server/request_handler.py
+# This file contains the logic for determining what the client has asked for and responding appropriately.
 
 def handle_request(conn, data):
     try:
@@ -17,7 +18,7 @@ def handle_request(conn, data):
 
         if command == 'LIST':
             # Example: Send back a list of files in the storage directory
-            files = get_files_in_storage()  # Hypothetical function
+            files = get_files_in_storage()  # example function for testing
             response = "\n".join(files)
         
         elif command == 'UPLOAD':
@@ -40,5 +41,5 @@ def handle_request(conn, data):
         conn.sendall(b"Error processing your request.")
 
 def get_files_in_storage():
-    # Just a placeholder function for listing files in a directory (could be replaced with actual logic)
+    # Just a placeholder function for listing files in a directory (Will be replaced with actual logic)
     return ["file1.txt", "file2.jpg", "file3.pdf"]
