@@ -3,12 +3,13 @@
 <head>
     <title>NAS UI</title>
     <script src="/static/script.js" defer></script>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <h1>File Listing</h1>
     <ul>
         {{range .}}
-        <li {{if .IsDirectory}}onclick="goToDirectory('{{.Name}}')" style="cursor:pointer"{{end}}>
+        <li {{if .IsDirectory}}class="directory" onclick="goToDirectory('{{.Name}}')" style="cursor:pointer"{{end}}>
             {{.Name}} ({{.Size}} bytes), IsDirectory == {{.IsDirectory}}
         </li>
         {{end}}
