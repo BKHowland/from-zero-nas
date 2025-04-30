@@ -28,7 +28,6 @@ func readFileDir(dir string) []FileInfo {
 
 	var filesfound []FileInfo // to store info on files found
 	for _, entry := range entries {
-		// println(entry.Name(), entry.IsDir())
 		info, err := entry.Info()
 		if err != nil {
 			log.Printf("Skipping %s due to error: %v", entry.Name(), err)
@@ -37,21 +36,14 @@ func readFileDir(dir string) []FileInfo {
 		filesfound = append(filesfound, FileInfo{Name: entry.Name(), Size: info.Size(), IsDirectory: entry.IsDir()})
 	}
 
-	// files := []FileInfo{ // This creates a hardcoded slice (Go's version of a dynamic array)
-	// 	{"example.txt", 1234},
-	// 	{"photo.jpg", 567890},
-	// }
 	return filesfound
 }
 
 func mainHandler(w http.ResponseWriter, r *http.Request) {
 	// r represents the request (GET, headers, form data), while w is used to send data back to the client.
-	// files := []FileInfo{ // This creates a hardcoded slice (Go's version of a dynamic array)
-	// 	{"example.txt", 1234},
-	// 	{"photo.jpg", 567890},
-	// }
-	println("Request URL:", r.URL.Path) // This was added as a reminder to handle favicon.ico requests later. mainhandler called twice per visit.
-	filesfound := readFileDir("./filedir")
+
+	println("Request URL:", r.URL.Path)    // This was added as a reminder to handle favicon.ico requests later. mainhandler called twice per visit.
+	filesfound := readFileDir("./filedir") // This creates a slice (Go's version of a dynamic array)
 
 	tmpl := template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
 	// template.Must panics if an error occurs in parsing. Go reads the index.html file and treats it as a template.
