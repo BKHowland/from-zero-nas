@@ -8,7 +8,9 @@
     <h1>File Listing</h1>
     <ul>
         {{range .}}
-        <li>{{.Name}} ({{.Size}} bytes), IsDirectory == {{.IsDirectory}}</li>
+        <li {{if .IsDirectory}}onclick="goToDirectory('{{.Name}}')" style="cursor:pointer"{{end}}>
+            {{.Name}} ({{.Size}} bytes), IsDirectory == {{.IsDirectory}}
+        </li>
         {{end}}
     </ul>
 
