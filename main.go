@@ -29,6 +29,7 @@ func readFileDir(dir string) []FileInfo {
 		return filesfound
 	}
 
+	//loop through all discovered files and folders and add to the return
 	for _, entry := range entries {
 		if entry.Name() != ".gitignore" {
 			info, err := entry.Info()
