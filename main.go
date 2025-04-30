@@ -60,6 +60,7 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", mainHandler)                         // registers handler for root URL
 	http.HandleFunc("/api/submit", handlers.ApiSubmitHandler) // Data-only endpoint (API). JavaScript running in the page makes a background request to that API endpoint.
+	http.HandleFunc("/api/gotodirectory", handlers.ApiGoToDirHandler)
 	//This request goes to /api/submit behind the scenes — no page reload.
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static")))) // This sets up a handler for static files, like JavaScript or CSS
 	/*
