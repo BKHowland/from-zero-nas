@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NAS UI</title>
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <h1>File Listing</h1>
+    <ul>
+        {{range .}}
+        <li>{{.Name}} ({{.Size}} bytes)</li>
+        {{end}}
+    </ul>
+
+    <h2>Send Filename (Async)</h2>
+    <input type="text" id="filename" placeholder="Enter filename">
+    <button onclick="submitFilename()">Submit</button>
+    <p id="response"></p>
+</body>
+</html>
+
+
