@@ -8,7 +8,7 @@
     <h1>File Listing</h1>
     <ul>
         {{range .}}
-        <li>{{.Name}} ({{.Size}} bytes)</li>
+        <li>{{.Name}} ({{.Size}} bytes), IsDirectory == {{.IsDirectory}}</li>
         {{end}}
     </ul>
 
@@ -16,6 +16,7 @@
     <input type="text" id="filename" placeholder="Enter filename">
     <button onclick="submitFilename()">Submit</button>
     <p id="response"></p>
+    
 </body>
 </html>
 
