@@ -28,5 +28,5 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	println("Server started at http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe("0.0.0.0:8080", nil) // listen on all interfaces and accept from any IP address.
 }
