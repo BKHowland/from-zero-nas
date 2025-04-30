@@ -21,19 +21,23 @@ type FileInfo struct {
 
 func readFileDir(dir string) []FileInfo {
 	// return a slice fileinfo objects containing files or subdirectories within the provided directory via.
+	var filesfound []FileInfo // to store info on files found
 	entries, err := os.ReadDir(dir)
 	if err != nil {
-		log.Fatal(err)
+		// log.Fatal(err)
+		log.Printf("Failed to read directory: %v", err)
+		return filesfound
 	}
 
-	var filesfound []FileInfo // to store info on files found
 	for _, entry := range entries {
-		info, err := entry.Info()
-		if err != nil {
-			log.Printf("Skipping %s due to error: %v", entry.Name(), err)
-			continue
+		if entry.Name() != ".gitignore" {
+			info, err := entry.Info()
+			if err != nil {
+				log.Printf("Skipping %s due to error: %v", entry.Name(), err)
+				continue
+			}
+			filesfound = append(filesfound, FileInfo{Name: entry.Name(), Size: info.Size(), IsDirectory: entry.IsDir()})
 		}
-		filesfound = append(filesfound, FileInfo{Name: entry.Name(), Size: info.Size(), IsDirectory: entry.IsDir()})
 	}
 
 	return filesfound
@@ -42,8 +46,8 @@ func readFileDir(dir string) []FileInfo {
 func mainHandler(w http.ResponseWriter, r *http.Request) {
 	// r represents the request (GET, headers, form data), while w is used to send data back to the client.
 
-	println("Request URL:", r.URL.Path)    // This was added as a reminder to handle favicon.ico requests later. mainhandler called twice per visit.
-	filesfound := readFileDir("./filedir") // This creates a slice (Go's version of a dynamic array)
+	println("Request URL:", r.URL.Path)              // This was added as a reminder to handle favicon.ico requests later. mainhandler called twice per visit.
+	filesfound := readFileDir("./storage-directory") // This creates a slice (Go's version of a dynamic array)
 
 	tmpl := template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
 	// template.Must panics if an error occurs in parsing. Go reads the index.html file and treats it as a template.
