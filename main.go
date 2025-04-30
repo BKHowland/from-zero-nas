@@ -25,7 +25,7 @@ func readFileDir(dir string) []FileInfo {
 	entries, err := os.ReadDir(dir)
 	if err != nil {
 		// log.Fatal(err)
-		log.Printf("Failed to read directory: %v", err)
+		log.Printf("Failed to read directory: %s (%v)", dir, err) //avoid closing program on error.
 		return filesfound
 	}
 
