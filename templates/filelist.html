@@ -1,0 +1,7 @@
+{{/* Used for updating just the file list on the webpage asynchronously. This is a Go template comment and won’t appear in output */}}
+
+{{range .}}
+    <li {{if .IsDirectory}}class="directory" onclick="goToDirectory('{{.Path}}')" style="cursor:pointer"{{end}}>
+        {{.Name}} ({{.Size}} bytes), IsDirectory == {{.IsDirectory}}, {{.Path}}
+    </li>
+{{end}}
