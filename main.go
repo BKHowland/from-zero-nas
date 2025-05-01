@@ -10,9 +10,8 @@ import (
 // templates allow generating dynamic text from data. data passed to template during exec. items enclosed in {{ }} are actions
 
 func main() {
-	http.HandleFunc("/", handlers.MainHandler)                        // registers handler for root URL
-	http.HandleFunc("/api/submit", handlers.ApiSubmitHandler)         // Data-only endpoint (API). JavaScript running in the page makes a background request to that API endpoint.
-	http.HandleFunc("/api/gotodirectory", handlers.ApiGoToDirHandler) // old method, being replaced by URL method below
+	http.HandleFunc("/", handlers.MainHandler)                // registers handler for root URL
+	http.HandleFunc("/api/submit", handlers.ApiSubmitHandler) // Data-only endpoint (API). JavaScript running in the page makes a background request to that API endpoint.
 	// Endpoint for dynamic file list fetching
 	http.HandleFunc("/filelist", handlers.FileListHandler)
 	//This request goes to /api/submit behind the scenes — no page reload.

@@ -24,27 +24,6 @@ function submitFilename() {
 }
 
 
-// function goToDirectory(name) {
-//     // example: redirect or load dynamically
-//     // window.location.href = '/browse/' + encodeURIComponent(name);
-//     console.log("Clicked to go to directory: ", name);
-
-//     fetch("/api/gotodirectory", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ directory: name })
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         document.getElementById("response").textContent = data.details;
-//     })
-//     .catch(error => {
-//         document.getElementById("response").textContent = "Error: " + error;
-//     });
-// }
-
 function goToDirectory(directory) {
     // sends get request for files in a particular directory.
     console.log("Clicked to go to directory: ", directory);
