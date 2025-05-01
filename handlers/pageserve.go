@@ -10,8 +10,8 @@ import (
 func MainHandler(w http.ResponseWriter, r *http.Request) {
 	// r represents the request (GET, headers, form data), while w is used to send data back to the client.
 
-	println("Request URL:", r.URL.Path)              // This was added as a reminder to handle favicon.ico requests later. mainhandler called twice per visit.
-	filesfound := ReadFileDir("./storage-directory") // This creates a slice (Go's version of a dynamic array)
+	println("Request URL:", r.URL.Path)               // This was added as a reminder to handle favicon.ico requests later. mainhandler called twice per visit.
+	filesfound := ReadFileDir("./storage-directory/") // This creates a slice (Go's version of a dynamic array)
 
 	// tmpl := template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
 	// // Define the function map first for converting relative file path into filename within template.

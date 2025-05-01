@@ -38,6 +38,7 @@ func ReadFileDir(dir string) []FileInfo {
 	return filesfound
 }
 
+		dir = "./storage-directory/"
 func ApiSubmitHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Received request:", r.Method, r.URL.Path, "-", r.RemoteAddr) // Log the request in terminal
 	if r.Method == "POST" {
