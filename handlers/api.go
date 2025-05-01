@@ -9,6 +9,7 @@ import (
 
 type FileInfo struct {
 	Name        string
+	Path        string // to track where each file is from, and request directory changes.
 	Size        int64
 	IsDirectory bool
 }
@@ -31,7 +32,7 @@ func ReadFileDir(dir string) []FileInfo {
 				log.Printf("Skipping %s due to error: %v", entry.Name(), err)
 				continue
 			}
-			filesfound = append(filesfound, FileInfo{Name: entry.Name(), Size: info.Size(), IsDirectory: entry.IsDir()})
+			filesfound = append(filesfound, FileInfo{Name: entry.Name(), Path: dir + entry.Name(), Size: info.Size(), IsDirectory: entry.IsDir()})
 		}
 	}
 

@@ -10,7 +10,7 @@
     <ul>
         {{range .}}
         <li {{if .IsDirectory}}class="directory" onclick="goToDirectory('{{.Name}}')" style="cursor:pointer"{{end}}>
-            {{.Name}} ({{.Size}} bytes), IsDirectory == {{.IsDirectory}}
+            {{.Name}} ({{.Size}} bytes), IsDirectory == {{.IsDirectory}}, {{.Path}}
         </li>
         {{end}}
     </ul>
