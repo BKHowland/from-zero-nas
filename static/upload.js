@@ -39,10 +39,11 @@
 // }
 
 
-function uploadFile() {
-    const file = document.getElementById("fileInput").files[0];
-    if (!file) {
-        alert("Please select a file first.");
+
+function uploadFiles() {
+    const files = document.getElementById("fileInput").files;
+    if (!files.length) {
+        alert("Please select at least one file.");
         return;
     }
 
@@ -69,6 +70,8 @@ function uploadFile() {
 
     // Send file
     const formData = new FormData();
-    formData.append("file", file);
+    for (let i = 0; i < files.length; i++) {
+        formData.append("files", files[i]); // Multiple files under the same key
+    }
     xhr.send(formData);
 }
