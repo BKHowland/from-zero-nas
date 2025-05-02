@@ -27,9 +27,16 @@
         <button type="submit">Upload</button>
     </form>
     <p id="status"></p> -->
-    <h2>Upload a File</h2>
+    <h2>Upload Files and Folders</h2>
 
-    <input type="file" id="fileInput" multiple>
+    <label>Select Files:
+        <input type="file" id="fileInput" multiple>
+    </label>
+
+    <label>Select Folder:
+        <input type="file" id="folderInput" webkitdirectory multiple>
+    </label>
+
     <button onclick="uploadFiles()">Upload</button>
 
     <div style="margin-top: 10px;">

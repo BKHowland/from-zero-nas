@@ -42,8 +42,10 @@
 
 function uploadFiles() {
     const files = document.getElementById("fileInput").files;
-    if (!files.length) {
-        alert("Please select at least one file.");
+    const folderFiles = document.getElementById("folderInput").files;
+
+    if (files.length === 0 && folderFiles.length === 0) {
+        alert("Please select at least one file or folder.");
         return;
     }
 
@@ -68,10 +70,23 @@ function uploadFiles() {
         }
     };
 
-    // Send file
+    // Prepare FormData
     const formData = new FormData();
+
+    // Add regular files
     for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]); // Multiple files under the same key
     }
+
+    // Add folder files with their relative paths
+    for (let i = 0; i < folderFiles.length; i++) {
+        const file = folderFiles[i];
+        console.log("appending file to formdata with relative path: ", file.webkitRelativePath); // This should log to the browser console
+        formData.append("files", file, file.webkitRelativePath); // Preserve folder structure
+        
+    }
+
+    // Send the files
     xhr.send(formData);
 }
+
