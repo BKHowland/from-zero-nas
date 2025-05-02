@@ -1,0 +1,14 @@
+/* styles.css - determined style (colors, fonts, spacing, layout) of HTML*/
+
+.directory {
+    /* This only applies to items with directory class. */
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+/* Optional: Add hover effect for visual feedback */
+.directory:hover {
+    color: darkblue;
+    text-decoration: none;
+}

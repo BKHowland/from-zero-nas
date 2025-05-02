@@ -3,12 +3,17 @@
 <head>
     <title>NAS UI</title>
     <script src="/static/script.js" defer></script>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <h1>File Listing</h1>
-    <ul>
+    <button onclick="goToDirectory('')">Up One Level</button>
+    <p id="up-button-response"></p>
+    <ul id="file-list">
         {{range .}}
-        <li>{{.Name}} ({{.Size}} bytes)</li>
+        <li {{if .IsDirectory}}class="directory" onclick="goToDirectory('{{.Path}}')" style="cursor:pointer"{{end}}>
+            {{.Name}} ({{.Size}} bytes), IsDirectory == {{.IsDirectory}}, {{.Path}}
+        </li>
         {{end}}
     </ul>
 
@@ -16,6 +21,7 @@
     <input type="text" id="filename" placeholder="Enter filename">
     <button onclick="submitFilename()">Submit</button>
     <p id="response"></p>
+    
 </body>
 </html>
 

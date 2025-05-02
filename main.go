@@ -1,31 +1,28 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
-	"path/filepath"
 
 	"nas-go/handlers"
 )
 
-type FileInfo struct {
-	Name string
-	Size int64
-}
-
-func mainHandler(w http.ResponseWriter, r *http.Request) {
-	files := []FileInfo{
-		{"example.txt", 1234},
-		{"photo.jpg", 567890},
-	}
-	tmpl := template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
-	tmpl.Execute(w, files)
-}
+// handler functions are used to respond to http requests.
+// templates allow generating dynamic text from data. data passed to template during exec. items enclosed in {{ }} are actions
 
 func main() {
-	http.HandleFunc("/", mainHandler)
-	http.HandleFunc("/api/submit", handlers.ApiSubmitHandler)
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.HandleFunc("/", handlers.MainHandler)                // registers handler for root URL
+	http.HandleFunc("/api/submit", handlers.ApiSubmitHandler) // Data-only endpoint (API). JavaScript running in the page makes a background request to that API endpoint.
+	// Endpoint for dynamic file list fetching
+	http.HandleFunc("/filelist", handlers.FileListHandler)
+	//This request goes to /api/submit behind the scenes — no page reload.
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static")))) // This sets up a handler for static files, like JavaScript or CSS
+	/*
+		/static/ is the URL prefix in the browser.
+		http.FileServer(http.Dir("static")) serves files from the ./static/ folder on disk.
+		http.StripPrefix("/static/", ...) removes /static/ from the request path before looking for files.
+		A browser request to /static/script.js
+		Becomes ./static/script.js on disk
+	*/
 
 	println("Server started at http://localhost:8080")
 	http.ListenAndServe("0.0.0.0:8080", nil) // listen on all interfaces and accept from any IP address.
