@@ -41,6 +41,9 @@
 
 
 function uploadFiles() {
+    // based on files selected, will upload them to the server. Allows regular files or folders.
+    // TODO: for folders, make it respect the directory structure instead of unpacking them. maybe server side issue.
+    // also, allow providing a directory or using the current directory to tell the server where to put them!
     const files = document.getElementById("fileInput").files;
     const folderFiles = document.getElementById("folderInput").files;
 

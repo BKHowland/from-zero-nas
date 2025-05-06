@@ -9,6 +9,8 @@ import (
 )
 
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
+	// server will send request containing file data to be saved on server. multiple files and folders to be supported.
+
 	const maxUploadSize = 10 << 30 // 10 GB
 	r.Body = http.MaxBytesReader(w, r.Body, maxUploadSize)
 
@@ -23,6 +25,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, fileHeader := range files {
 		// This still gives you the correct relative path (if sent via third argument in append())
+		// currently not being respected in practice. to be fixed.
 		relPath := fileHeader.Filename
 
 		// Debug log
