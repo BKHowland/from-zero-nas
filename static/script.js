@@ -48,6 +48,9 @@ function goToDirectory(directory) {
             document.getElementById("file-list").innerHTML = html;
             document.getElementById("up-button-response").textContent = "" // clear error box
             currentDirectory = directory; // update global tracker with new current location
+            console.log("Switched to directory: ", currentDirectory);
+            document.getElementById("current-directory-display").textContent = currentDirectory // display current directory
+            
         })
         .catch(err => {
             console.error("Error updating file list:", err);
