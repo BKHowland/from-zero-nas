@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"encoding/json"
 	"io"
 	"log"
 	"net/http"
@@ -70,5 +71,11 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println("############### UPLOAD FINISH ###############")
 
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+	// http.Redirect(w, r, "/", http.StatusSeeOther)
+	resp := map[string]string{
+		"status":  "ok",
+		"details": "Files Saved successfully to " + destinationPath,
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(resp)
 }
