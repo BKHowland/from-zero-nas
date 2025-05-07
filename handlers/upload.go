@@ -23,7 +23,9 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	form := r.MultipartForm
 	log.Print("############### UPLOAD START ############### \nReceived save request: \n", form)
 	files := form.File["files"]
-	paths := form.Value["paths"] // Slice of relative paths, same order as files
+	paths := form.Value["paths"]                    // Slice of relative paths, same order as files
+	destinationPath := form.Value["destination"][0] // Path currently viewed by client. Only one provided.
+	log.Println("Requested save directory: ", destinationPath)
 	log.Println("Relative path count: ", len(paths))
 
 	for i, fileHeader := range files {
@@ -36,7 +38,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 
 		// Sanitize and ensure full path
 		relPath = filepath.Clean(relPath)
-		uploadPath := filepath.Join("uploads", relPath)
+		uploadPath := filepath.Join(destinationPath, relPath)
 
 		err := os.MkdirAll(filepath.Dir(uploadPath), os.ModePerm)
 		if err != nil {

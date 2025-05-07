@@ -89,6 +89,7 @@ function uploadFiles() {
         formData.append("files", file); // Go's fileHeader.Filename strips path from the base name and discards. have to seperately add it.
         formData.append("paths", file.webkitRelativePath); // Preserve folder structure.        
     }
+    formData.append("destination", window.sharedData.currentDirectory); // Set the upload destination to currently viewed dir.  
 
     // Send the files
     xhr.send(formData);
