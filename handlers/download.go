@@ -10,6 +10,7 @@ import (
 )
 
 func DownloadHandler(w http.ResponseWriter, r *http.Request) {
+	// handles the client's request to download a file or folder. serves zip for folders.
 	path := r.URL.Query().Get("path")
 	if path == "" {
 		http.Error(w, "Missing file path", http.StatusBadRequest)
@@ -28,7 +29,7 @@ func DownloadHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Failed to zip folder", http.StatusInternalServerError)
 			return
 		}
-		defer os.Remove(tempZipPath)
+		defer os.Remove(tempZipPath) // remove zip after execution but before return.
 
 		w.Header().Set("Content-Disposition", "attachment; filename="+filepath.Base(tempZipPath))
 		w.Header().Set("Content-Type", "application/zip")
@@ -80,14 +81,14 @@ func zipFolder(folderPath string) error {
 		}
 
 		if info.IsDir() {
-			//check if it is a directory and handle if so
+			// check if it is a directory and handle if so
 			// Add trailing slash to mark it as a directory in zip
 			_, err := zipWriter.Create(relPath + "/")
 			if err != nil {
 				log.Println("Error creating directory in zip:", err)
 				return err
 			}
-			return nil
+			return nil // skip file opening and processing
 		}
 
 		// Open the file
