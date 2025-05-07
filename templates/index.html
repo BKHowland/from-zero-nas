@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>File Listing</h1>
+    <p>The directory is: <span id="current-directory-display">./storage-directory/</span></p>
     <button onclick="goToDirectory('')">Up One Level</button>
     <p id="up-button-response"></p>
     <ul id="file-list">
@@ -21,7 +22,31 @@
     <input type="text" id="filename" placeholder="Enter filename">
     <button onclick="submitFilename()">Submit</button>
     <p id="response"></p>
-    
+
+    <!-- <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+    <p id="status"></p> -->
+    <h2>Upload Files and Folders</h2>
+
+    <label>Select Files:
+        <input type="file" id="fileInput" multiple>
+    </label>
+
+    <label>Select Folder:
+        <input type="file" id="folderInput" webkitdirectory multiple>
+    </label>
+
+    <button onclick="uploadFiles()">Upload</button>
+
+    <div style="margin-top: 10px;">
+        <progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+        <p id="statusText">Waiting for upload...</p>
+    </div>
+
+    <script src="/static/upload.js"></script>
+
 </body>
 </html>
 

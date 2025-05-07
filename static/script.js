@@ -4,9 +4,14 @@
 
 //Log entries can be removed on project completion as they only impact chrome's dev tools console. 
 
-let currentDirectory = "./storage-directory/"; // initial value - store to allow traversing backwards.
+// let currentDirectory = "./storage-directory/"; // initial value - store to allow traversing backwards.
+window.sharedData = {
+    currentDirectory: "./storage-directory/"
+};
 
 function submitFilename() {
+    // function for handling file name submit button, which provides example response from server of the name.
+    // jump point for file requests/DL?
     const filename = document.getElementById("filename").value;
     console.log("submitFilename triggered, filename:", filename); // This should log to the browser console
     fetch("/api/submit", {
@@ -28,15 +33,16 @@ function submitFilename() {
 
 function goToDirectory(directory) {
     // sends get request for files in a particular directory. if none provided, go up a level
+    // ***NOTE: if not seeing changes, ENSURE CACHING TURNED OFF ON BROWSER! 
     console.log("Clicked to go to directory: ", directory);
-    if (directory == "" && currentDirectory == "./storage-directory/"){
+    if (directory == "" && window.sharedData.currentDirectory == "./storage-directory/"){
         // Asking to go up at top level. Have to refuse. 
         document.getElementById("up-button-response").textContent = "Cannot go up at top level"
         return
     }
     else if (directory == ""){
         // none provided means go up one level
-        directory = currentDirectory
+        directory = window.sharedData.currentDirectory
         directory = directory.replace(/\/$/, ''); // Remove trailing slash
         let parts = directory.split('/'); // split current path into parts
         parts.pop(); // Remove last segment (current folder)
@@ -47,7 +53,10 @@ function goToDirectory(directory) {
         .then(html => {
             document.getElementById("file-list").innerHTML = html;
             document.getElementById("up-button-response").textContent = "" // clear error box
-            currentDirectory = directory; // update global tracker with new current location
+            window.sharedData.currentDirectory = directory; // update global tracker with new current location
+            console.log("Switched to directory: ", window.sharedData.currentDirectory);
+            document.getElementById("current-directory-display").textContent = window.sharedData.currentDirectory // display current directory
+            
         })
         .catch(err => {
             console.error("Error updating file list:", err);
