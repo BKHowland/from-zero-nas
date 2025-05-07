@@ -68,6 +68,22 @@ function uploadFiles() {
     xhr.onload = function () {
         if (xhr.status == 200) {
             document.getElementById("statusText").textContent = "Upload complete!";
+
+            // refresh view
+            fetch(`/filelist?dir=${window.sharedData.currentDirectory}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("file-list").innerHTML = html;
+                document.getElementById("up-button-response").textContent = "" // clear error box
+                // window.sharedData.currentDirectory = directory; // update global tracker with new current location
+                console.log("Refreshed directory: ", window.sharedData.currentDirectory);
+                document.getElementById("current-directory-display").textContent = window.sharedData.currentDirectory // display current directory
+                
+            })
+            .catch(err => {
+                console.error("Error updating file list:", err);
+            });
+
         } else {
             document.getElementById("statusText").textContent = `Error: ${xhr.statusText}`;
         }
@@ -93,5 +109,6 @@ function uploadFiles() {
 
     // Send the files
     xhr.send(formData);
+
 }
 
