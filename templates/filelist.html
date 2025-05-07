@@ -3,5 +3,6 @@
 {{range .}}
     <li {{if .IsDirectory}}class="directory" onclick="goToDirectory('{{.Path}}')" style="cursor:pointer"{{end}}>
         {{.Name}} ({{.Size}} bytes), IsDirectory == {{.IsDirectory}}, {{.Path}}
+        <button onclick="downloadFiles('{{.Path}}')">Download</button>
     </li>
 {{end}}

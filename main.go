@@ -25,7 +25,8 @@ func main() {
 		Becomes ./static/script.js on disk
 	*/
 	http.HandleFunc("/upload", handlers.UploadHandler)
-	os.MkdirAll("uploads", os.ModePerm)
+	http.HandleFunc("/download", handlers.DownloadHandler)
+	os.MkdirAll("uploads", os.ModePerm) //remove later - was for testing purposes.
 
 	println("Server started at http://localhost:8080")
 	http.ListenAndServe("0.0.0.0:8080", nil) // listen on all interfaces and accept from any IP address.
