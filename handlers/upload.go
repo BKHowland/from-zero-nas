@@ -9,7 +9,7 @@ import (
 )
 
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
-	// server will send request containing file data to be saved on server. multiple files and folders to be supported.
+	// cleint will send request containing file data to be saved on server. This handles saving it. multiple files and folders to be supported.
 
 	const maxUploadSize = 10 << 30 // 10 GB
 	r.Body = http.MaxBytesReader(w, r.Body, maxUploadSize)
@@ -21,12 +21,15 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	form := r.MultipartForm
+	log.Print("############### UPLOAD START ############### \nReceived save request: \n", form)
 	files := form.File["files"]
+	paths := form.Value["paths"] // Slice of relative paths, same order as files
+	log.Println("Relative path count: ", len(paths))
 
-	for _, fileHeader := range files {
+	for i, fileHeader := range files {
 		// This still gives you the correct relative path (if sent via third argument in append())
 		// currently not being respected in practice. to be fixed.
-		relPath := fileHeader.Filename
+		relPath := paths[i] // Get matching relative path
 
 		// Debug log
 		log.Println("Received file with relPath:", relPath)
@@ -63,6 +66,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 
 		log.Printf("Saved: %s", uploadPath)
 	}
+	log.Println("############### UPLOAD FINISH ###############")
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }

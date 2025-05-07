@@ -85,8 +85,9 @@ function uploadFiles() {
     for (let i = 0; i < folderFiles.length; i++) {
         const file = folderFiles[i];
         console.log("appending file to formdata with relative path: ", file.webkitRelativePath); // This should log to the browser console
-        formData.append("files", file, file.webkitRelativePath); // Preserve folder structure
-        
+        // formData.append("files", file, file.webkitRelativePath); // Preserve folder structure
+        formData.append("files", file); // Go's fileHeader.Filename strips path from the base name and discards. have to seperately add it.
+        formData.append("paths", file.webkitRelativePath); // Preserve folder structure.        
     }
 
     // Send the files
