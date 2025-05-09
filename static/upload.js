@@ -42,6 +42,10 @@ function uploadFiles() {
                 console.error("Error updating file list:", err);
             });
 
+            // clear file selections
+            document.getElementById("fileInput").value = "";
+            document.getElementById("folderInput").value = "";
+
         } else {
             document.getElementById("statusText").textContent = `Error: ${xhr.statusText}`;
         }
