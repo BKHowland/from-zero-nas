@@ -71,7 +71,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println("############### UPLOAD FINISH ###############")
 
-	// http.Redirect(w, r, "/", http.StatusSeeOther)
+	// http.Redirect(w, r, "/", http.StatusSeeOther) // rather than redirect, front end will fetch updated list.
 	resp := map[string]string{
 		"status":  "ok",
 		"details": "Files Saved successfully to " + destinationPath,

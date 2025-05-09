@@ -4,9 +4,8 @@
 
 //Log entries can be removed on project completion as they only impact chrome's dev tools console. 
 
-// let currentDirectory = "./storage-directory/"; // initial value - store to allow traversing backwards.
 window.sharedData = {
-    currentDirectory: "./storage-directory/"
+    currentDirectory: "./storage-directory/" //initial value - store to allow traversing backwards.
 };
 
 

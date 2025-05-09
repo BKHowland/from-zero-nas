@@ -1,44 +1,3 @@
-// function uploadFile() {
-//     const file = document.getElementById("fileInput").files[0];
-//     if (!file) return;
-
-//     const chunkSize = 1024 * 1024; // 1MB
-//     const totalChunks = Math.ceil(file.size / chunkSize);
-
-//     let currentChunk = 0;
-//     const status = document.getElementById("status");
-
-//     function uploadNext() {
-//         const start = currentChunk * chunkSize;
-//         const end = Math.min(file.size, start + chunkSize);
-//         const chunk = file.slice(start, end);
-
-//         const formData = new FormData();
-//         formData.append("filename", file.name);
-//         formData.append("chunkIndex", currentChunk);
-//         formData.append("totalChunks", totalChunks);
-//         formData.append("chunk", chunk);
-
-//         fetch("/upload", {
-//             method: "POST",
-//             body: formData
-//         }).then(() => {
-//             currentChunk++;
-//             if (currentChunk < totalChunks) {
-//                 uploadNext();
-//                 status.textContent = `Uploading chunk ${currentChunk}/${totalChunks}`;
-//             } else {
-//                 status.textContent = "Upload complete!";
-//             }
-//         }).catch(err => {
-//             status.textContent = "Upload failed: " + err;
-//         });
-//     }
-
-//     uploadNext();
-// }
-
-
 
 function uploadFiles() {
     // based on files selected, will upload them to the server. Allows regular files or folders.
@@ -75,7 +34,6 @@ function uploadFiles() {
             .then(html => {
                 document.getElementById("file-list").innerHTML = html;
                 document.getElementById("up-button-response").textContent = "" // clear error box
-                // window.sharedData.currentDirectory = directory; // update global tracker with new current location
                 console.log("Refreshed directory: ", window.sharedData.currentDirectory);
                 document.getElementById("current-directory-display").textContent = window.sharedData.currentDirectory // display current directory
                 
@@ -101,7 +59,6 @@ function uploadFiles() {
     for (let i = 0; i < folderFiles.length; i++) {
         const file = folderFiles[i];
         console.log("appending file to formdata with relative path: ", file.webkitRelativePath); // This should log to the browser console
-        // formData.append("files", file, file.webkitRelativePath); // Preserve folder structure
         formData.append("files", file); // Go's fileHeader.Filename strips path from the base name and discards. have to seperately add it.
         formData.append("paths", file.webkitRelativePath); // Preserve folder structure.        
     }
