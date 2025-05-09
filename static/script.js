@@ -9,27 +9,6 @@ window.sharedData = {
     currentDirectory: "./storage-directory/"
 };
 
-function submitFilename() {
-    // function for handling file name submit button, which provides example response from server of the name.
-    // jump point for file requests/DL?
-    const filename = document.getElementById("filename").value;
-    console.log("submitFilename triggered, filename:", filename); // This should log to the browser console
-    fetch("/api/submit", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ filename: filename })
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("response").textContent = data.details;
-    })
-    .catch(error => {
-        document.getElementById("response").textContent = "Error: " + error;
-    });
-}
-
 
 function goToDirectory(directory) {
     // sends get request for files in a particular directory. if none provided, go up a level

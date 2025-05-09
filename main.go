@@ -11,10 +11,8 @@ import (
 // templates allow generating dynamic text from data. data passed to template during exec. items enclosed in {{ }} are actions
 
 func main() {
-	http.HandleFunc("/", handlers.MainHandler)                // registers handler for root URL
-	http.HandleFunc("/api/submit", handlers.ApiSubmitHandler) // Data-only endpoint (API). JavaScript running in the page makes a background request to that API endpoint.
-	// Endpoint for dynamic file list fetching
-	http.HandleFunc("/filelist", handlers.FileListHandler)
+	http.HandleFunc("/", handlers.MainHandler)             // registers handler for root URL
+	http.HandleFunc("/filelist", handlers.FileListHandler) // Endpoint for dynamic file list fetching
 	//This request goes to /api/submit behind the scenes — no page reload.
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static")))) // This sets up a handler for static files, like JavaScript or CSS
 	/*
