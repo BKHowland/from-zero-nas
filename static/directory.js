@@ -1,34 +1,12 @@
 // Handles sending requests to the Go server.
-// <script src="/static/script.js" defer></script>
-// This tells the browser: "When you load this page, fetch script.js from the /static/ URL path and run it after the HTML is parsed."
+// <script src="/static/directory.js" defer></script>
+// This tells the browser: "When you load this page, fetch directory.js from the /static/ URL path and run it after the HTML is parsed."
 
 //Log entries can be removed on project completion as they only impact chrome's dev tools console. 
 
-// let currentDirectory = "./storage-directory/"; // initial value - store to allow traversing backwards.
 window.sharedData = {
-    currentDirectory: "./storage-directory/"
+    currentDirectory: "./storage-directory/" //initial value - store to allow traversing backwards.
 };
-
-function submitFilename() {
-    // function for handling file name submit button, which provides example response from server of the name.
-    // jump point for file requests/DL?
-    const filename = document.getElementById("filename").value;
-    console.log("submitFilename triggered, filename:", filename); // This should log to the browser console
-    fetch("/api/submit", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ filename: filename })
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("response").textContent = data.details;
-    })
-    .catch(error => {
-        document.getElementById("response").textContent = "Error: " + error;
-    });
-}
 
 
 function goToDirectory(directory) {

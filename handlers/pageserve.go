@@ -13,14 +13,6 @@ func MainHandler(w http.ResponseWriter, r *http.Request) {
 	println("Request URL:", r.URL.Path)               // This was added as a reminder to handle favicon.ico requests later. mainhandler called twice per visit.
 	filesfound := ReadFileDir("./storage-directory/") // This creates a slice (Go's version of a dynamic array)
 
-	// tmpl := template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
-	// // Define the function map first for converting relative file path into filename within template.
-	// funcMap := template.FuncMap{
-	// 	"filename": path.Base, // Registering the path.Base function as "filename"
-	// }
-
-	// Create the template with the function map
-	// tmpl, err := template.New("index.html").Funcs(funcMap).ParseFiles(filepath.Join("templates", "index.html"))
 	tmpl, err := template.New("index.html").ParseFiles(filepath.Join("templates", "index.html"))
 	if err != nil {
 		log.Println("Error parsing template:", err) // Log the error without terminating the program
