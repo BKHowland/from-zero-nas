@@ -1,6 +1,6 @@
 // Handles sending requests to the Go server.
-// <script src="/static/script.js" defer></script>
-// This tells the browser: "When you load this page, fetch script.js from the /static/ URL path and run it after the HTML is parsed."
+// <script src="/static/directory.js" defer></script>
+// This tells the browser: "When you load this page, fetch directory.js from the /static/ URL path and run it after the HTML is parsed."
 
 //Log entries can be removed on project completion as they only impact chrome's dev tools console. 
 

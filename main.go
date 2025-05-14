@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	"nas-go/handlers"
+	"fznas/handlers"
 )
 
 // handler functions are used to respond to http requests.
@@ -19,8 +19,8 @@ func main() {
 		/static/ is the URL prefix in the browser.
 		http.FileServer(http.Dir("static")) serves files from the ./static/ folder on disk.
 		http.StripPrefix("/static/", ...) removes /static/ from the request path before looking for files.
-		A browser request to /static/script.js
-		Becomes ./static/script.js on disk
+		A browser request to /static/directory.js
+		Becomes ./static/directory.js on disk
 	*/
 	http.HandleFunc("/upload", handlers.UploadHandler)
 	http.HandleFunc("/download", handlers.DownloadHandler)

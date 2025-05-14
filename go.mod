@@ -1,3 +1,3 @@
-module nas-go
+module fznas
 
 go 1.24.2
