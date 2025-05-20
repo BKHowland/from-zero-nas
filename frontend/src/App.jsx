@@ -5,6 +5,7 @@ import Footer from "./components/Footer.jsx"
 // import './app.css'
 import DirectoryHeader from "./components/DirectoryHeader.jsx"
 import FileList from "./components/FileList.jsx"
+import UploadButton from './components/UploadButton.jsx';
 import FileUploadZone from './components/FileUploadZone.jsx';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <DirectoryHeader currentDir={currentDir}/>
       <FileList currentDir={currentDir} onDirectoryClick={handleDirectoryClick} />
       <FileUploadZone currentDir={currentDir}/>
+      <UploadButton/>
       <Footer/>
     </>
   )
