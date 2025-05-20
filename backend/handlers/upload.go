@@ -12,6 +12,12 @@ import (
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	// cleint will send request containing file data to be saved on server. This handles saving it. multiple files and folders to be supported.
 
+	// Set CORS headers to allow requests from localhost:5173
+	w.Header().Set("Access-Control-Allow-Origin", "*") // Change this to your front-end URL if needed
+	// TODO: REMOVE THE STAR AS IT IS A SECURITY RISK. TESTING PURPOSES ONLY.
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
+
 	const maxUploadSize = 10 << 30 // 10 GB
 	r.Body = http.MaxBytesReader(w, r.Body, maxUploadSize)
 

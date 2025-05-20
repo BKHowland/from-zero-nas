@@ -5,6 +5,7 @@ import Footer from "./components/Footer.jsx"
 // import './app.css'
 import DirectoryHeader from "./components/DirectoryHeader.jsx"
 import FileList from "./components/FileList.jsx"
+import FileUploadZone from './components/FileUploadZone.jsx';
 
 function App() {
   //react useState hook. declares piece of state and function to change it.
@@ -19,6 +20,7 @@ function App() {
       <Header/>
       <DirectoryHeader currentDir={currentDir}/>
       <FileList currentDir={currentDir} onDirectoryClick={handleDirectoryClick} />
+      <FileUploadZone currentDir={currentDir}/>
       <Footer/>
     </>
   )
