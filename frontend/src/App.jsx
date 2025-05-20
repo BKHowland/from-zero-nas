@@ -11,17 +11,19 @@ import FileUploadZone from './components/FileUploadZone.jsx';
 function App() {
   //react useState hook. declares piece of state and function to change it.
   const [currentDir, setCurrentDir] = useState('./storage-directory/'); 
+  const [refreshKey, setRefreshKey] = useState(0); // to allow force refresh of filelist
 
   const handleDirectoryClick = (path) => {
     setCurrentDir(path);
   };
 
+
   return (
     <>
       <Header/>
       <DirectoryHeader currentDir={currentDir}/>
-      <FileList currentDir={currentDir} onDirectoryClick={handleDirectoryClick} />
-      <FileUploadZone currentDir={currentDir}/>
+      <FileList currentDir={currentDir} onDirectoryClick={handleDirectoryClick} refreshKey={refreshKey}/>
+      <FileUploadZone currentDir={currentDir} forceRefresh={() => setRefreshKey(prev => prev + 1)}/>
       <UploadButton/>
       <Footer/>
     </>

@@ -27,7 +27,7 @@ function GoUpButton({ currentDir, onDirectoryClick, showWarning, setShowWarning 
 }
 
 
-function FileList({ currentDir, onDirectoryClick }) {
+function FileList({ currentDir, onDirectoryClick, refreshKey }) {
     // onDirectoryClick: a callback to handle directory clicks.
     const [files, setFiles] = useState([]);
     const [showWarning, setShowWarning] = useState(false);
@@ -38,7 +38,7 @@ function FileList({ currentDir, onDirectoryClick }) {
         .then(res => res.json())
         .then(data => setFiles(data))
         .catch(err => console.error("Error fetching file list:", err));
-    }, [currentDir]);
+    }, [currentDir, refreshKey]);
 
     // New wrapper for onDirectoryClick that clears the warning on directory clicks (going down)
     const handleDirectoryClick = (path) => {

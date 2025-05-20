@@ -1,6 +1,6 @@
 import DropZone from './DropZone';
 
-function FileUploadZone({ currentDir }) {
+function FileUploadZone({ currentDir, forceRefresh }) {
   const handleUpload = ({ files, paths }) => {
     const formData = new FormData();
 
@@ -17,6 +17,8 @@ function FileUploadZone({ currentDir }) {
     xhr.onload = () => {
       if (xhr.status === 200) {
         console.log('Upload complete!');
+        forceRefresh();
+        console.log('after refresh function with dir: ', currentDir);
       } else {
         console.error('Upload failed:', xhr.statusText);
       }
