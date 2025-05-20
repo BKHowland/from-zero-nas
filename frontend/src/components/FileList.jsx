@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react'; // required for useState hook
 
 function GoUpButton({ currentDir, onDirectoryClick }) {
   const handleClick = () => {
-    const parent = currentDir.split('/').slice(0, -1).join('/') || '/';
+    const parent = currentDir.replace(/\/+$/, '')   // remove trailing slashes
+                         .split('/')                //make list of folder names
+                         .slice(0, -1)              //remove last folder name
+                         .join('/') + "/" || '/';   //join back
+                        //replace trailing slash TODO: adjust back end to not expect this. overcomplicated.
     onDirectoryClick(parent);
   };
 
