@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react'; // required for useState hook  
+import DownloadButton from './DownloadButton';
 
 function GoUpButton({ currentDir, onDirectoryClick, showWarning, setShowWarning }) {
     const handleClick = () => {
@@ -63,6 +64,7 @@ function FileList({ currentDir, onDirectoryClick }) {
             ) : (
                 <span> {file.Name} ({file.Size} bytes)</span>
             )}
+            <DownloadButton filePath={file.Path} />
             </li>
         ))}
         </ul>
