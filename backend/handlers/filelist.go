@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type FileInfo struct {
@@ -80,6 +81,12 @@ func ReactFileListHandler(w http.ResponseWriter, r *http.Request) {
 	if dir == "" {
 		// may be able to remove this, since this prefix is added by default.
 		dir = "./storage-directory/"
+	}
+
+	if !(strings.HasPrefix(dir, "./storage-directory/")) {
+		// Checks for illegal directory access outside of storage.
+		http.Error(w, `{"error": "illegal prefix: path must start with './storage-directory/'"}`, http.StatusBadRequest)
+		return
 	}
 
 	files := ReadFileDir(dir)
