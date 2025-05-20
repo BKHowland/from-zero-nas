@@ -7,7 +7,8 @@ import DirectoryHeader from "./components/DirectoryHeader.jsx"
 import FileList from "./components/FileList.jsx"
 
 function App() {
-  const [currentDir, setCurrentDir] = useState('');
+  //react useState hook. declares piece of state and function to change it.
+  const [currentDir, setCurrentDir] = useState('./storage-directory/'); 
 
   const handleDirectoryClick = (path) => {
     setCurrentDir(path);
@@ -16,7 +17,7 @@ function App() {
   return (
     <>
       <Header/>
-      <DirectoryHeader currentDir={"test"}/>
+      <DirectoryHeader currentDir={currentDir}/>
       <FileList currentDir={currentDir} onDirectoryClick={handleDirectoryClick} />
       <Footer/>
     </>
