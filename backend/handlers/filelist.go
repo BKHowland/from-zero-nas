@@ -1,11 +1,13 @@
 package handlers
 
 import (
+	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type FileInfo struct {
@@ -62,4 +64,33 @@ func FileListHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmpl.Execute(w, files)
+}
+
+func ReactFileListHandler(w http.ResponseWriter, r *http.Request) {
+	// Set CORS headers to allow requests from localhost:5173
+	w.Header().Set("Access-Control-Allow-Origin", "*") // Change this to your front-end URL if needed
+	// TODO: REMOVE THE STAR AS IT IS A SECURITY RISK. TESTING PURPOSES ONLY.
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Allow-Methods", "GET")
+
+	if r.Method == http.MethodOptions {
+		return // Handle pre-flight request
+	}
+
+	dir := r.URL.Query().Get("dir")
+	if dir == "" {
+		// may be able to remove this, since this prefix is added by default.
+		dir = "./storage-directory/"
+	}
+
+	if !(strings.HasPrefix(dir, "./storage-directory/")) {
+		// Checks for illegal directory access outside of storage.
+		http.Error(w, `{"error": "illegal prefix: path must start with './storage-directory/'"}`, http.StatusBadRequest)
+		return
+	}
+
+	files := ReadFileDir(dir)
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(files)
 }

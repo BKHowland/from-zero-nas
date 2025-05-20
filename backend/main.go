@@ -10,8 +10,9 @@ import (
 // templates allow generating dynamic text from data. data passed to template during exec. items enclosed in {{ }} are actions
 
 func main() {
-	http.HandleFunc("/", handlers.MainHandler)             // registers handler for root URL
-	http.HandleFunc("/filelist", handlers.FileListHandler) // Endpoint for dynamic file list fetching
+	http.HandleFunc("/", handlers.MainHandler)                       // registers handler for root URL
+	http.HandleFunc("/filelist", handlers.FileListHandler)           // Endpoint for dynamic file list fetching
+	http.HandleFunc("/reactfilelist", handlers.ReactFileListHandler) // tempname handler for react file list fetching requests
 	//This request goes to /api/submit behind the scenes — no page reload.
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static")))) // This sets up a handler for static files, like JavaScript or CSS
 	/*
