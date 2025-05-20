@@ -1,6 +1,16 @@
 
 import { useState, useEffect } from 'react'; // required for useState hook  
 
+function GoUpButton({ currentDir, onDirectoryClick }) {
+  const handleClick = () => {
+    const parent = currentDir.split('/').slice(0, -1).join('/') || '/';
+    onDirectoryClick(parent);
+  };
+
+  return <button onClick={handleClick}>⬆️ Up One Level</button>;
+}
+
+
 function FileList({ currentDir, onDirectoryClick }) {
     // onDirectoryClick: a callback to handle directory clicks.
 
@@ -15,19 +25,22 @@ function FileList({ currentDir, onDirectoryClick }) {
     }, [currentDir]);
 
   return (
-    <ul>
-      {files.map(file => (
-        <li key={file.Path}>
-          {file.IsDirectory ? (
-            <button onClick={() => onDirectoryClick(file.Path)}>
-                {file.Name}
-            </button>
-          ) : (
-            <span> {file.Name} ({file.Size} bytes)</span>
-          )}
-        </li>
-      ))}
-    </ul>
+    <>
+        <GoUpButton currentDir={currentDir} onDirectoryClick={onDirectoryClick} />
+        <ul>
+        {files.map(file => (
+            <li key={file.Path}>
+            {file.IsDirectory ? (
+                <button onClick={() => onDirectoryClick(file.Path)}>
+                    {file.Name}
+                </button>
+            ) : (
+                <span> {file.Name} ({file.Size} bytes)</span>
+            )}
+            </li>
+        ))}
+        </ul>
+    </>
   );
 }
 
