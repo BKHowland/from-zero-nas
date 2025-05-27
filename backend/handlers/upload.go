@@ -30,6 +30,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	form := r.MultipartForm
 	log.Print("############### UPLOAD START ############### \nReceived save request: \n", form)
 	files := form.File["files"]
+	log.Println("Number of files received: ", len(files))
 	paths := form.Value["paths"]                    // Slice of relative paths, same order as files
 	destinationPath := form.Value["destination"][0] // Path currently viewed by client. Only one provided.
 	log.Println("Requested save directory: ", destinationPath)
@@ -45,16 +46,19 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 
 		// Sanitize and ensure full path
 		relPath = filepath.Clean(relPath)
-		uploadPath := filepath.Join(destinationPath, relPath)
+		uploadPath := filepath.Join(destinationPath, relPath) //destination + relative (includes filename)
+		log.Println("File upload path (destination): ", uploadPath)
 
 		err := os.MkdirAll(filepath.Dir(uploadPath), os.ModePerm)
 		if err != nil {
+			log.Println("Error: Unable to create directories")
 			http.Error(w, "Unable to create directories", http.StatusInternalServerError)
 			return
 		}
 
 		file, err := fileHeader.Open()
 		if err != nil {
+			log.Println("Error: Error opening file")
 			http.Error(w, "Error opening file", http.StatusInternalServerError)
 			return
 		}
@@ -62,6 +66,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 
 		outFile, err := os.Create(uploadPath)
 		if err != nil {
+			log.Println("Error: Unable to create file")
 			http.Error(w, "Unable to create file", http.StatusInternalServerError)
 			return
 		}
@@ -69,6 +74,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 
 		_, err = io.Copy(outFile, file)
 		if err != nil {
+			log.Println("Error: Error saving file")
 			http.Error(w, "Error saving file", http.StatusInternalServerError)
 			return
 		}
@@ -77,6 +83,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println("############### UPLOAD FINISH ###############")
 
+	//TODO: the website is not correctly receiving the http errors.
 	// http.Redirect(w, r, "/", http.StatusSeeOther) // rather than redirect, front end will fetch updated list.
 	resp := map[string]string{
 		"status":  "ok",
