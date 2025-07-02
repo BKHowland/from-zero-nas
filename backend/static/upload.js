@@ -57,6 +57,7 @@ function uploadFiles() {
     // Add regular files
     for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]); // Multiple files under the same key
+        formData.append("paths", files[i].name); // attach name as relative path to indicate no folder structure.
     }
 
     // Add folder files with their relative paths
