@@ -35,7 +35,7 @@ function FileUploadZone({ currentDir, forceRefresh }) {
 
     xhr.onloadend = () => {
       setUploading(false);
-      setProgress(100); // optional: force 100% on complete
+      setProgress(100); // Force 100% on complete
     };
 
     xhr.onload = () => {
