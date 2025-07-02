@@ -1,5 +1,3 @@
-
-import { useState, useEffect } from 'react'; // required for useState hook  
 import { useRef } from 'react';
 
 function handleUpload(uploadUrl) {
@@ -8,15 +6,6 @@ function handleUpload(uploadUrl) {
 
 function UploadButton({ onUpload, isDir }) {
     // manual file selection alternative.
-    // return(
-    //     <div style={{ marginTop: '10px' }}>
-    //         {/* <input type="file" onChange={handleChange} /> */}
-    //         <button>
-    //         Upload
-    //         </button>
-    //         {/* {progress > 0 && <p>Progress: {progress}%</p>} */}
-    //     </div>
-    // );
     const fileInputRef = useRef();
     let btnLabel = "Upload "
     if(isDir){
