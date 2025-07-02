@@ -20,7 +20,9 @@ function GoUpButton({ currentDir, onDirectoryClick, showWarning, setShowWarning 
 
   return(
     <>
-      <button onClick={handleClick}>Up One Level</button>
+      <button onClick={handleClick}
+      style={{ marginLeft: '10px', boxShadow: "2px 2px 2px #9E9E9E" }}
+      >Up One Level</button>
       {showWarning && <p style={{ color: 'red' }}>Cannot go up at top level!</p>}
     </>
   );

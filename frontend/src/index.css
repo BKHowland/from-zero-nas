@@ -13,6 +13,52 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+header {
+  background-color: #464646;  /* Dark background matching buttons */
+  padding: 20px 40px;
+  color: rgba(255, 255, 255, 0.87); /* Matches your root text color */
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 3.2em; /* matches your existing h1 size */
+  line-height: 1.1;
+  white-space: nowrap; /* prevents wrapping */
+}
+
+
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 30px;
+}
+
+header nav ul li a {
+  color: rgba(255, 255, 255, 0.87);
+  text-decoration: none;
+  font-weight: 500; /* consistent with your link styles */
+  transition: color 0.25s;
+}
+
+header nav ul li a:hover {
+  color: #646cff; /* your link hover color */
+}
+
+header hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #444; /* subtle separator */
+  margin-top: 20px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -24,10 +70,9 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  display: block;
 }
 
 h1 {

@@ -17,7 +17,7 @@ function handleDownload(filePath) {
 
 function DownloadButton({ filePath }) {
     return (
-        <button onClick={() => handleDownload(filePath)} style={{ marginLeft: '10px' }}>Download</button>
+        <button onClick={() => handleDownload(filePath)} style={{ marginLeft: '10px', marginTop: '5px', boxShadow: "2px 2px 2px #9E9E9E" }}>Download</button>
     );
 }
 
