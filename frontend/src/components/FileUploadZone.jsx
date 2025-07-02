@@ -1,4 +1,5 @@
 import DropZone from './DropZone';
+import UploadButton from './UploadButton';
 
 function FileUploadZone({ currentDir, forceRefresh }) {
   const handleUpload = ({ files, paths }) => {
@@ -30,6 +31,10 @@ function FileUploadZone({ currentDir, forceRefresh }) {
   return (
     <>
       <DropZone onUpload={handleUpload} />
+      <label>Or, manually select:</label>
+      <UploadButton onUpload={handleUpload} isDir={false} />
+      <UploadButton onUpload={handleUpload} isDir={true} />
+
     </>
   );
 }

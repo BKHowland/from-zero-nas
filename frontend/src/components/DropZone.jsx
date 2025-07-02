@@ -1,6 +1,8 @@
 
 import { useCallback, useState } from 'react';
 
+// currently this uses callback and dependency array while upload button does not. Try to pick one method if possible. 
+
 function DropZone({ onUpload }) {
   const [warning, setWarning] = useState('');
 
