@@ -4,6 +4,7 @@ import UploadButton from './UploadButton';
 function FileUploadZone({ currentDir, forceRefresh }) {
   const handleUpload = ({ files, paths }) => {
     const formData = new FormData();
+    console.log('handle upload with paths: ', paths);
 
     for (let i = 0; i < files.length; i++) {
       formData.append('files', files[i]);

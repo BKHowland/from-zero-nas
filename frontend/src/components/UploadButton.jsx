@@ -34,7 +34,10 @@ function UploadButton({ onUpload, isDir }) {
 
     return (
         <>
-        <button onClick={() => fileInputRef.current.click()}>
+        <button onClick={() => {
+            fileInputRef.current.value = null; // clear to allow same folder reselect
+            fileInputRef.current.click()
+        }}>
             {btnLabel}
         </button>
 
@@ -43,7 +46,7 @@ function UploadButton({ onUpload, isDir }) {
             ref={fileInputRef}
             style={{ display: 'none' }}
             multiple
-            {...(isDir ? { webkitdirectory: '' } : {})} // allows folder selection in Chromium. jsx spread to conditionally include param.
+            webkitdirectory={isDir ? '' : undefined} // allows folder selection in Chromium. jsx spread to conditionally include param.
             onChange={handleManualSelect}
         />
         </>
