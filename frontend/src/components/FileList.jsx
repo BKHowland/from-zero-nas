@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react'; // required for useState hook  
 import DownloadButton from './DownloadButton';
+import folderIcon from '../assets/folderIcon.png';
 
 function GoUpButton({ currentDir, onDirectoryClick, showWarning, setShowWarning }) {
     const handleClick = () => {
@@ -56,12 +57,13 @@ function FileList({ currentDir, onDirectoryClick, refreshKey }) {
             showWarning={showWarning}
             setShowWarning={setShowWarning}
         />
-        <ul>
+        <ul className="file-list-ul">
         {files.map(file => (
             <li className="file-list-li" key={file.Path}>
             {file.IsDirectory ? (
-                <button onClick={() => handleDirectoryClick(file.Path)}>
-                    {file.Name}
+                <button className="icon-button" onClick={() => handleDirectoryClick(file.Path)}>
+                    <img src={folderIcon} alt="folder icon" className="icon-image" />
+                    <span title={file.Name} className="icon-text">{file.Name}</span>
                 </button>
             ) : (
                 <span title={file.Name}> {file.Name} ({file.Size} bytes)</span>
