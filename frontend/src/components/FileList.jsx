@@ -58,13 +58,13 @@ function FileList({ currentDir, onDirectoryClick, refreshKey }) {
         />
         <ul>
         {files.map(file => (
-            <li key={file.Path}>
+            <li className="file-list-li" key={file.Path}>
             {file.IsDirectory ? (
                 <button onClick={() => handleDirectoryClick(file.Path)}>
                     {file.Name}
                 </button>
             ) : (
-                <span> {file.Name} ({file.Size} bytes)</span>
+                <span title={file.Name}> {file.Name} ({file.Size} bytes)</span>
             )}
             <DownloadButton filePath={file.Path} />
             </li>
