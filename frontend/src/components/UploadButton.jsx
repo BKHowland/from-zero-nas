@@ -23,11 +23,10 @@ function UploadButton({ onUpload, isDir }) {
 
     return (
         <>
-        <button onClick={() => {
+        <button className="upload-button" onClick={() => {
             fileInputRef.current.value = null; // clear to allow same folder reselect
             fileInputRef.current.click()
         }}
-        style={{ marginLeft: '10px', boxShadow: "2px 2px 2px #9E9E9E" }}
         >
             {btnLabel}
         </button>

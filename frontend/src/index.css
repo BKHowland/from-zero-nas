@@ -99,6 +99,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.download-button{
+  /* padding: none; */
+  /* border: 0; used for on hover. so commented out. */
+  box-shadow: 2px 2px 2px #9E9E9E;
+  min-width: 120px;
+  margin-top: 2px;
+}
+
+.upload-button{
+  margin-left: 10px;
+  box-shadow: 2px 2px 2px #9E9E9E;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
