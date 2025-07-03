@@ -112,6 +112,22 @@ button:focus-visible {
   box-shadow: 2px 2px 2px #9E9E9E;
 }
 
+.icon-fakebutton{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+  padding: 10px;
+  /* cursor: pointer; */
+  min-width: 120px;
+  max-width: 120px;
+  position: relative;
+  cursor: default;
+  /* border-color: transparent; */
+}
+
 .icon-button {
   display: flex;
   flex-direction: column;
@@ -141,6 +157,16 @@ button:focus-visible {
   max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.icon-filesize{
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  pointer-events: none; /* allows clicks to pass through */
 }
 
 .file-list-ul {

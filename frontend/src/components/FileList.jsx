@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'; // required for useState hook  
 import DownloadButton from './DownloadButton';
 import folderIcon from '../assets/folderIcon.png';
+import fileIcon from '../assets/fileIcon.png';
 
 function GoUpButton({ currentDir, onDirectoryClick, showWarning, setShowWarning }) {
     const handleClick = () => {
@@ -58,7 +59,7 @@ function FileList({ currentDir, onDirectoryClick, refreshKey }) {
             setShowWarning={setShowWarning}
         />
         {files != null ?
-          <ul className="file-list-ul">
+          (<ul className="file-list-ul">
             {files.map(file => (
                 <li className="file-list-li" key={file.Path}>
                 {file.IsDirectory ? (
@@ -67,14 +68,18 @@ function FileList({ currentDir, onDirectoryClick, refreshKey }) {
                         <span title={file.Name} className="icon-text">{file.Name}</span>
                     </button>
                 ) : (
-                    <span title={file.Name}> {file.Name} ({file.Size} bytes)</span>
+                    <button className="icon-fakebutton">
+                        <img src={fileIcon} alt="file icon" className="icon-image" />
+                        <span title={file.Name} className="icon-text">{file.Name}</span>
+                        <span className="icon-filesize">({file.Size} bytes)</span>
+                    </button>
                 )}
                 <DownloadButton filePath={file.Path} />
                 </li>
             ))}
-          </ul>
+          </ul>)
           :
-          <p>This folder is empty.</p> // alternate condition using ternary operator for empty folders.
+          (<p>This folder is empty.</p>) // alternate condition using ternary operator for empty folders.
         }
     </>
   );
