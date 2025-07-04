@@ -54,9 +54,11 @@ function FileUploadZone({ currentDir, forceRefresh }) {
   return (
     <>
       <DropZone onUpload={handleUpload} />
-      <label>Or, manually select:</label>
-      <UploadButton onUpload={handleUpload} isDir={false} />
-      <UploadButton onUpload={handleUpload} isDir={true} />
+      <div className='alt-upload-options'>
+        <label>Or, manually select:</label>
+        <UploadButton onUpload={handleUpload} isDir={false} />
+        <UploadButton onUpload={handleUpload} isDir={true} />
+      </div>
 
       {uploading && (
         <div style={{ marginTop: '10px' }}>

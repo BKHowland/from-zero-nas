@@ -215,6 +215,10 @@ button:focus-visible {
   max-width: 1000px;
   
 }
+
+.alt-upload-options{
+  margin-left: 20px;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
