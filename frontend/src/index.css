@@ -59,6 +59,10 @@ header hr {
   margin-top: 20px;
 }
 
+.directory-header {
+  margin-left: 20px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -78,6 +82,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin-left: 20px;
 }
 
 button {
