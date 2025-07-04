@@ -17,6 +17,18 @@ type FileInfo struct {
 	IsDirectory bool
 }
 
+func GetDirSize(path string) int64 {
+	// to help get the sizes for folders
+	var size int64 = 0
+	filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
+		if err == nil && !info.IsDir() {
+			size += info.Size()
+		}
+		return nil
+	})
+	return size
+}
+
 func ReadFileDir(dir string) []FileInfo {
 	// return a slice fileinfo objects containing files or subdirectories within the provided directory via.
 	var filesfound []FileInfo               // to store info on files found
@@ -37,7 +49,7 @@ func ReadFileDir(dir string) []FileInfo {
 				continue
 			}
 			if entry.IsDir() {
-				filesfound = append(filesfound, FileInfo{Name: entry.Name(), Path: dir + entry.Name() + "/", Size: info.Size(), IsDirectory: entry.IsDir()})
+				filesfound = append(filesfound, FileInfo{Name: entry.Name(), Path: dir + entry.Name() + "/", Size: GetDirSize(dir + entry.Name()), IsDirectory: entry.IsDir()})
 			} else {
 				filesfound = append(filesfound, FileInfo{Name: entry.Name(), Path: dir + entry.Name(), Size: info.Size(), IsDirectory: entry.IsDir()})
 			}
