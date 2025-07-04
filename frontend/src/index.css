@@ -219,6 +219,23 @@ button:focus-visible {
 .alt-upload-options{
   margin-left: 20px;
 }
+
+footer{
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #464646;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  z-index: 1000; /* ensures it's on top */
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
