@@ -38,7 +38,7 @@ function MakeFileSizeReadable(fileSize) {
     divCount += 1;
   }
   fileSize = parseFloat(fileSize.toFixed(2)).toString();
-  console.log('divcount: ', divCount);
+  // console.log('divcount: ', divCount);
   switch (divCount) {
     case 0:
       return fileSize + " B"
@@ -89,13 +89,14 @@ function FileList({ currentDir, onDirectoryClick, refreshKey }) {
                     <button className="icon-button" onClick={() => handleDirectoryClick(file.Path)}>
                         <img src={folderIcon} alt="folder icon" className="icon-image" />
                         <span title={file.Name} className="icon-text">{file.Name}</span>
+                        <span className="icon-filesize">{MakeFileSizeReadable(file.Size)}</span>
                     </button>
                 ) : (
                     <button className="icon-fakebutton">
                         <img src={fileIcon} alt="file icon" className="icon-image" />
                         <span title={file.Name} className="icon-text">{file.Name}</span>
                         {/* <span className="icon-filesize">({file.Size} bytes)</span> */}
-                        <span className="icon-filesize">({MakeFileSizeReadable(file.Size)})</span>
+                        <span className="icon-filesize">{MakeFileSizeReadable(file.Size)}</span>
                     </button>
                 )}
                 <DownloadButton filePath={file.Path} />

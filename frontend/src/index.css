@@ -137,9 +137,12 @@ button:focus-visible {
 
   border-radius: 8px;
   padding: 10px;
-  cursor: pointer;
+  /* cursor: pointer; */
   min-width: 120px;
   max-width: 120px;
+  position: relative;
+  cursor: default;
+  /* border-color: transparent; */
   
 }
 
@@ -163,7 +166,7 @@ button:focus-visible {
 .icon-filesize{
   font-size: 12px;
   position: absolute;
-  top: 50%;
+  top: 43%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none; /* allows clicks to pass through */
