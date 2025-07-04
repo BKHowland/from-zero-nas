@@ -30,6 +30,29 @@ function GoUpButton({ currentDir, onDirectoryClick, showWarning, setShowWarning 
   );
 }
 
+function MakeFileSizeReadable(fileSize) {
+  // convert byte sizes into more meaningful units. Up to GB.
+  let divCount = 0; // div count determines units
+  while(fileSize >= 1024){
+    fileSize = fileSize / 1024;
+    divCount += 1;
+  }
+  fileSize = parseFloat(fileSize.toFixed(2)).toString();
+  console.log('divcount: ', divCount);
+  switch (divCount) {
+    case 0:
+      return fileSize + " B"
+    case 1:
+      return fileSize + " KB"
+    case 2:
+      return fileSize + " MB"
+    case 3:
+      return fileSize + " GB"
+    default:
+      return "File Size Error";
+  }
+}
+
 
 function FileList({ currentDir, onDirectoryClick, refreshKey }) {
   // onDirectoryClick: a callback to handle directory clicks.
@@ -71,7 +94,8 @@ function FileList({ currentDir, onDirectoryClick, refreshKey }) {
                     <button className="icon-fakebutton">
                         <img src={fileIcon} alt="file icon" className="icon-image" />
                         <span title={file.Name} className="icon-text">{file.Name}</span>
-                        <span className="icon-filesize">({file.Size} bytes)</span>
+                        {/* <span className="icon-filesize">({file.Size} bytes)</span> */}
+                        <span className="icon-filesize">({MakeFileSizeReadable(file.Size)})</span>
                     </button>
                 )}
                 <DownloadButton filePath={file.Path} />
