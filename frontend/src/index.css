@@ -104,6 +104,11 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.go-up-button{
+  margin-left: 20px; 
+  box-shadow: 2px 2px 2px #9E9E9E; 
+}
+
 .download-button{
   /* padding: none; */
   /* border: 0; used for on hover. so commented out. */
