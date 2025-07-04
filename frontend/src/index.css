@@ -99,6 +99,99 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.download-button{
+  /* padding: none; */
+  /* border: 0; used for on hover. so commented out. */
+  box-shadow: 2px 2px 2px #9E9E9E;
+  min-width: 120px;
+  margin-top: 2px;
+}
+
+.upload-button{
+  margin-left: 10px;
+  box-shadow: 2px 2px 2px #9E9E9E;
+}
+
+.icon-fakebutton{ 
+  /* for files. for future, change this to not be clickable. by structure type or otherwise. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+  padding: 10px;
+  /* cursor: pointer; */
+  min-width: 120px;
+  max-width: 120px;
+  position: relative;
+  cursor: default;
+  /* border-color: transparent; */
+}
+
+.icon-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+  padding: 10px;
+  /* cursor: pointer; */
+  min-width: 120px;
+  max-width: 120px;
+  position: relative;
+  cursor: default;
+  /* border-color: transparent; */
+  
+}
+
+.icon-button:hover {
+  background-color: #efefef;
+}
+
+.icon-image {
+  width: 60px; /* adjust as needed */
+  height: 60px;
+  /* margin-bottom: 10px; */
+}
+
+.icon-text {
+  font-size: 14px;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon-filesize{
+  font-size: 12px;
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* allows clicks to pass through */
+}
+
+.file-list-ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* spacing between tiles */
+  list-style: none; /* removes bullet points */
+  /* padding: 0; */
+}
+
+.file-list-li{
+  display: flex;
+  flex-direction: column;   /* stack children vertically */
+  align-items: center;      /* center children horizontally */
+  min-width: 120px;
+  /* padding: 10px; */
+  /* background: #333; for testing purposes it makes aligning easier */
+  border-radius: 8px;
+  /* color: white; */
+  
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -1,6 +1,8 @@
 
 import { useState, useEffect } from 'react'; // required for useState hook  
 import DownloadButton from './DownloadButton';
+import folderIcon from '../assets/folderIcon.png';
+import fileIcon from '../assets/fileIcon.png';
 
 function GoUpButton({ currentDir, onDirectoryClick, showWarning, setShowWarning }) {
     const handleClick = () => {
@@ -28,25 +30,48 @@ function GoUpButton({ currentDir, onDirectoryClick, showWarning, setShowWarning 
   );
 }
 
+function MakeFileSizeReadable(fileSize) {
+  // convert byte sizes into more meaningful units. Up to GB.
+  let divCount = 0; // div count determines units
+  while(fileSize >= 1024){
+    fileSize = fileSize / 1024;
+    divCount += 1;
+  }
+  fileSize = parseFloat(fileSize.toFixed(2)).toString();
+  // console.log('divcount: ', divCount);
+  switch (divCount) {
+    case 0:
+      return fileSize + " B"
+    case 1:
+      return fileSize + " KB"
+    case 2:
+      return fileSize + " MB"
+    case 3:
+      return fileSize + " GB"
+    default:
+      return "File Size Error";
+  }
+}
+
 
 function FileList({ currentDir, onDirectoryClick, refreshKey }) {
-    // onDirectoryClick: a callback to handle directory clicks.
-    const [files, setFiles] = useState([]);
-    const [showWarning, setShowWarning] = useState(false);
+  // onDirectoryClick: a callback to handle directory clicks.
+  const [files, setFiles] = useState([]);
+  const [showWarning, setShowWarning] = useState(false);
 
-    // This effect runs every time currentDir changes. this means that onDirectoryClick triggers. 
-    useEffect(() => {
-    fetch(`http://10.0.0.235:8080/reactfilelist?dir=${encodeURIComponent(currentDir)}`) //replace with go server ip/port
-        .then(res => res.json())
-        .then(data => setFiles(data))
-        .catch(err => console.error("Error fetching file list:", err));
-    }, [currentDir, refreshKey]);
+  // This effect runs every time currentDir changes. this means that onDirectoryClick triggers. 
+  useEffect(() => {
+  fetch(`http://10.0.0.235:8080/reactfilelist?dir=${encodeURIComponent(currentDir)}`) //replace with go server ip/port
+      .then(res => res.json())
+      .then(data => setFiles(data))
+      .catch(err => console.error("Error fetching file list:", err));
+  }, [currentDir, refreshKey]);
 
-    // New wrapper for onDirectoryClick that clears the warning on directory clicks (going down)
-    const handleDirectoryClick = (path) => {
-        setShowWarning(false);       // clear warning when navigating down
-        onDirectoryClick(path);
-    };
+  // New wrapper for onDirectoryClick that clears the warning on directory clicks (going down)
+  const handleDirectoryClick = (path) => {
+      setShowWarning(false);       // clear warning when navigating down
+      onDirectoryClick(path);
+  };
 
   return (
     <>
@@ -56,20 +81,31 @@ function FileList({ currentDir, onDirectoryClick, refreshKey }) {
             showWarning={showWarning}
             setShowWarning={setShowWarning}
         />
-        <ul>
-        {files.map(file => (
-            <li key={file.Path}>
-            {file.IsDirectory ? (
-                <button onClick={() => handleDirectoryClick(file.Path)}>
-                    {file.Name}
-                </button>
-            ) : (
-                <span> {file.Name} ({file.Size} bytes)</span>
-            )}
-            <DownloadButton filePath={file.Path} />
-            </li>
-        ))}
-        </ul>
+        {files != null ?
+          (<ul className="file-list-ul">
+            {files.map(file => (
+                <li className="file-list-li" key={file.Path}>
+                {file.IsDirectory ? (
+                    <button className="icon-button" onClick={() => handleDirectoryClick(file.Path)}>
+                        <img src={folderIcon} alt="folder icon" className="icon-image" />
+                        <span title={file.Name} className="icon-text">{file.Name}</span>
+                        <span className="icon-filesize">{MakeFileSizeReadable(file.Size)}</span>
+                    </button>
+                ) : (
+                    <button className="icon-fakebutton">
+                        <img src={fileIcon} alt="file icon" className="icon-image" />
+                        <span title={file.Name} className="icon-text">{file.Name}</span>
+                        {/* <span className="icon-filesize">({file.Size} bytes)</span> */}
+                        <span className="icon-filesize">{MakeFileSizeReadable(file.Size)}</span>
+                    </button>
+                )}
+                <DownloadButton filePath={file.Path} />
+                </li>
+            ))}
+          </ul>)
+          :
+          (<p>This folder is empty.</p>) // alternate condition using ternary operator for empty folders.
+        }
     </>
   );
 }
