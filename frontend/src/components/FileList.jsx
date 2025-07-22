@@ -113,7 +113,7 @@ function FileList({ currentDir, onDirectoryClick, refreshKey, forceRefresh}) {
                         <span className="icon-filesize">{MakeFileSizeReadable(file.Size)}</span>
                     </button>
                 ) : (
-                    <button className="icon-fakebutton">
+                    <button className="icon-fakebutton" onMouseUp={(e) => e.currentTarget.blur()}> 
                         <img src={fileIcon} alt="file icon" className="icon-image" />
                         <span title={file.Name} className="icon-text">{file.Name}</span>
                         {/* <span className="icon-filesize">({file.Size} bytes)</span> */}
