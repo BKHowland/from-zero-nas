@@ -23,7 +23,8 @@ function App() {
       <Header/>
       <DirectoryHeader currentDir={currentDir}/>
       <hr></hr>
-      <FileList currentDir={currentDir} onDirectoryClick={handleDirectoryClick} refreshKey={refreshKey}/>
+      <FileList currentDir={currentDir} onDirectoryClick={handleDirectoryClick} refreshKey={refreshKey} 
+          forceRefresh={() => setRefreshKey(prev => prev + 1)}/>
       <FileUploadZone currentDir={currentDir} forceRefresh={() => setRefreshKey(prev => prev + 1)}/>
       <Footer/>
     </>

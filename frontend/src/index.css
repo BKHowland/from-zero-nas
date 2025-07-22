@@ -109,6 +109,23 @@ button:focus-visible {
   box-shadow: 2px 2px 2px #9E9E9E; 
 }
 
+.up-button-warning{
+  color: red;
+  height: 0.5rem; /* Optional: fix height if you want exact size */
+  margin-left: 20px;
+  line-height: 1;
+}
+
+.button-with-warning{
+  display: flex;
+  flex-direction: column;
+}
+
+.directory-buttons{
+  display: flex;
+  flex-direction: row;
+}
+
 .download-button{
   /* padding: none; */
   /* border: 0; used for on hover. so commented out. */
