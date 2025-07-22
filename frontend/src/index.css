@@ -85,6 +85,14 @@ h1 {
   margin-left: 20px;
 }
 
+hr.gradient-line {
+  border: none; /* Remove default border */
+  height: 2px;
+  background: linear-gradient(to right, #444, transparent);
+  margin: 1rem 0; /* Optional spacing */
+  opacity: 0.8;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -109,6 +117,28 @@ button:focus-visible {
   box-shadow: 2px 2px 2px #9E9E9E; 
 }
 
+.up-button-warning{
+  color: red;
+  height: 0.5rem; /* Optional: fix height if you want exact size */
+  margin-left: 20px;
+  line-height: 1;
+}
+
+.button-with-warning{
+  display: flex;
+  flex-direction: column;
+}
+
+.refresh-button{
+  margin-left: 20px; 
+  box-shadow: 2px 2px 2px #9E9E9E; 
+}
+
+.directory-buttons{
+  display: flex;
+  flex-direction: row;
+}
+
 .download-button{
   /* padding: none; */
   /* border: 0; used for on hover. so commented out. */
@@ -118,7 +148,7 @@ button:focus-visible {
 }
 
 .upload-button{
-  margin-left: 10px;
+  margin-left: 20px;
   box-shadow: 2px 2px 2px #9E9E9E;
 }
 
@@ -171,6 +201,7 @@ button:focus-visible {
   max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .icon-filesize{
