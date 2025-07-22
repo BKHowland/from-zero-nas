@@ -22,7 +22,7 @@ function GoUpButton({ currentDir, onDirectoryClick, showWarning, setShowWarning 
 
   return(
     <>
-      <button className='go-up-button' onClick={handleClick}
+      <button className='go-up-button' onClick={handleClick} onMouseUp={(event) => event.currentTarget.blur()}
       >Up One Level</button>
       {/* {showWarning && <p className='up-button-warning' style={{ color: 'red' }}>Cannot go up at top level!</p>} */}
       <p className="up-button-warning" style={{ visibility: showWarning ? 'visible' : 'hidden' }}>Cannot go up at top level!</p>
@@ -39,7 +39,7 @@ function RefreshButton({forceRefresh, setShowWarning}) {
 
   return(
     <>
-      <button className='refresh-button' onClick={handleClick}
+      <button className='refresh-button' onClick={handleClick} onMouseUp={(e) => e.currentTarget.blur()}
       >Refresh</button>
     </>
   );
