@@ -121,6 +121,11 @@ button:focus-visible {
   flex-direction: column;
 }
 
+.refresh-button{
+  margin-left: 20px; 
+  box-shadow: 2px 2px 2px #9E9E9E; 
+}
+
 .directory-buttons{
   display: flex;
   flex-direction: row;
