@@ -22,9 +22,10 @@ function App() {
     <>
       <Header/>
       <DirectoryHeader currentDir={currentDir}/>
-      <hr></hr>
+      {/* <hr className="gradient-line" ></hr> */}
       <FileList currentDir={currentDir} onDirectoryClick={handleDirectoryClick} refreshKey={refreshKey} 
           forceRefresh={() => setRefreshKey(prev => prev + 1)}/>
+      <hr className="gradient-line" ></hr>
       <FileUploadZone currentDir={currentDir} forceRefresh={() => setRefreshKey(prev => prev + 1)}/>
       <Footer/>
     </>

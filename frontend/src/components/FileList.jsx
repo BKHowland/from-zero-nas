@@ -102,6 +102,7 @@ function FileList({ currentDir, onDirectoryClick, refreshKey, forceRefresh}) {
               setShowWarning={setShowWarning}
           />
         </div>
+        <hr className="gradient-line" ></hr>
         {files != null ?
           (<ul className="file-list-ul">
             {files.map(file => (
