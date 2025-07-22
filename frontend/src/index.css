@@ -140,7 +140,7 @@ button:focus-visible {
 }
 
 .upload-button{
-  margin-left: 10px;
+  margin-left: 20px;
   box-shadow: 2px 2px 2px #9E9E9E;
 }
 
@@ -193,6 +193,7 @@ button:focus-visible {
   max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .icon-filesize{
