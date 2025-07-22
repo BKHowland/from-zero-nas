@@ -59,6 +59,10 @@ header hr {
   margin-top: 20px;
 }
 
+.directory-header {
+  margin-left: 20px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -78,6 +82,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin-left: 20px;
 }
 
 button {
@@ -97,6 +102,11 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.go-up-button{
+  margin-left: 20px; 
+  box-shadow: 2px 2px 2px #9E9E9E; 
 }
 
 .download-button{
@@ -190,6 +200,40 @@ button:focus-visible {
   border-radius: 8px;
   /* color: white; */
   
+}
+
+.drop-zone{
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center;
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 1em;
+  border-radius: 8px;
+  margin-left: 20px;
+  max-width: 1000px;
+  
+}
+
+.alt-upload-options{
+  margin-left: 20px;
+}
+
+footer{
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #464646;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  z-index: 1000; /* ensures it's on top */
 }
 
 @media (prefers-color-scheme: light) {

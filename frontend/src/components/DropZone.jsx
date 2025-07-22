@@ -70,18 +70,11 @@ function DropZone({ onUpload }) {
   }, [onUpload]);
 
   return (
-    <div
+    <div className='drop-zone'
       onDrop={handleDrop}
       onDragOver={(e) => e.preventDefault()}
-      style={{
-        border: '2px dashed #ccc',
-        padding: '20px',
-        textAlign: 'center',
-        marginBottom: '1em',
-        borderRadius: '8px',
-      }}
     >
-      <p>Drag and drop files or folders here</p>
+      <p>Drag and drop files or folders here to upload</p>
       {warning && <p style={{ color: 'red' }}>{warning}</p>}
     </div>
   );
